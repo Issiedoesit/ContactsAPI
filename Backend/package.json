@@ -1,0 +1,28 @@
+{
+  "name": "contactsapi-backend",
+  "version": "1.0.0",
+  "description": "NodeJS api for a contact storage application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Contacts",
+    "NodeJS",
+    "Express",
+    "Mongoose"
+  ],
+  "author": "Isioma Ekwemuka",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "nodemon": "^2.0.22"
+  }
+}
