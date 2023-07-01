@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useSWR from 'swr'
 import axios from 'axios'
 import Template from '../elements/Templates/Template'
 import { LuMailPlus, LuPhoneCall} from 'react-icons/lu'
+import ModalWrap from '../elements/Modal/ModalWrap'
 
 const Home = () => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const fetcher = async (url) => axios.get(url)
 
@@ -15,7 +18,7 @@ const Home = () => {
     console.log(data);
 
   return (
-    <Template >
+    <Template handleAddContact={()=>setIsModalOpen(true)}>
         <div className='text-white'>
             <h2 className={`text-xl font-bold`}>All Contacts</h2>
             <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-5 py-10`}>
@@ -38,6 +41,7 @@ const Home = () => {
                 })}
             </div>
         </div>
+        <ModalWrap id={`addContactModal`} modalState={isModalOpen} handleModal={()=>setIsModalOpen(false)}></ModalWrap>
     </Template>
   )
 }
