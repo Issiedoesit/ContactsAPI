@@ -11,12 +11,18 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "clsx": "^1.2.1",
+    "formik": "^2.4.2",
+    "framer-motion": "^10.12.18",
+    "intl-tel-input": "^18.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.1",
     "react-spinners": "^0.13.8",
-    "swr": "^2.2.0"
+    "swr": "^2.2.0",
+    "yup": "^1.2.0",
+    "yup-password": "^0.2.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

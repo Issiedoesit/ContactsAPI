@@ -4,6 +4,7 @@ import axios from 'axios'
 import Template from '../elements/Templates/Template'
 import { LuMailPlus, LuPhoneCall} from 'react-icons/lu'
 import ModalWrap from '../elements/Modal/ModalWrap'
+import AddContactModal from './Modals/AddContactModal'
 
 const Home = () => {
 
@@ -41,7 +42,9 @@ const Home = () => {
                 })}
             </div>
         </div>
-        <ModalWrap id={`addContactModal`} modalState={isModalOpen} handleModal={()=>setIsModalOpen(false)}></ModalWrap>
+        <ModalWrap id={`addContactModal`} modalState={isModalOpen} handleModal={()=>setIsModalOpen(false)}>
+            <AddContactModal />
+        </ModalWrap>
     </Template>
   )
 }
