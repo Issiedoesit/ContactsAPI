@@ -48,10 +48,12 @@ const AddContactModal = ({mutate, setIsModalOpen}) => {
             dp: Yup.mixed()
             .nullable()
             .test('fileSize', 'File size too large. Max size is 2mb', (value) => {
-              return value && value.size <= import.meta.env.VITE_CLOUDINARY_MAX_FILE_SIZE;
+              // Check file size only if the dp is not empty and is a file
+              return !value || (value && value.size <= import.meta.env.VITE_CLOUDINARY_MAX_FILE_SIZE);
             }),
             dp_url: Yup.
             string()
+            .nullable()
             .url('Format is url')
         })
     })
@@ -62,12 +64,16 @@ const AddContactModal = ({mutate, setIsModalOpen}) => {
 
     const addContact = () => {
 
+        // console.log(Object.keys(formik.errors).length);
+        // console.log(formik.errors);
+        // console.log(formik.values.dp);
+
         setSubmitting(true)
         if(Object.keys(formik.errors).length !== 0){
             setSubmitting(false)
             return
         }
-        console.log(Object.keys(formik.errors).length);
+        
 
         const {name, email, phone, gender} = formik.values
 
@@ -76,7 +82,7 @@ const AddContactModal = ({mutate, setIsModalOpen}) => {
         try {
             axios.post(`${import.meta.env.VITE_BASE_URL}/add`, {name:name, email:email, phone:phone, gender:gender, dp:dp})
             .then((res)=>{
-                console.log('res => ', res);
+                // console.log('res => ', res);
                 mutate()
             })
             .catch((err) => {

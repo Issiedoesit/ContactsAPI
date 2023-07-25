@@ -20,7 +20,7 @@ const Home = () => {
 
     // if (!data) return <Template><div className='text-white h-screen flex items-center justify-center'>Loading ...</div></Template>
 
-    console.log(data);
+    // console.log(data);
 
     const deleteContact = (contact) => {
         setDeleteDetails({...contact})

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const useBookSearch = (query, pageNumber) => {
+const useBookSearch = (query, pageNumber, setPageNumber) => {
 
     const [books, setBooks] = useState([])
     const [hasMore, setHasMore] = useState(false)
@@ -10,6 +10,7 @@ const useBookSearch = (query, pageNumber) => {
 
     useEffect(() => {
         setBooks([])
+        setPageNumber(1)
     }, [query])
 
     useEffect(() => {
@@ -34,6 +35,7 @@ const useBookSearch = (query, pageNumber) => {
         .catch((err) => {
             if (axios.isCancel(err)) return
             console.error(err);
+            setLoading(false)
             setError(true)
         })
 

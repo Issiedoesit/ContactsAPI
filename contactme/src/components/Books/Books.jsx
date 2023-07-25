@@ -9,7 +9,7 @@ const Books = () => {
     const [query, setQuery] = useState('')
     const [pageNumber, setPageNumber] = useState(1)
 
-    const {books, loading, error, hasMore} =  useBookSearch(query, pageNumber)
+    const {books, loading, error, hasMore} =  useBookSearch(query, pageNumber, setPageNumber)
 
     
     const observer = useRef()
@@ -35,11 +35,16 @@ const Books = () => {
 
         <div className='py-4 text-white'>
             <div className="flex flex-col gap-4">
+                {books.length == 0 && !query && !loading && !error && <div className={`py-4`}>Enter text to begin searching</div>}
+                {books.length == 0 && query && !loading && !error && <div className={`py-4`}>Your search "{query}" returned 0 results</div>}
                 {books.length > 0 && books.map((book, idx) => {
                     if(books.length == idx + 1) {
-                        return <div key={idx} ref={lastBookElement} className={`py-2 hover:bg-gray-500`} >{book.title}</div>
+                        return <div key={idx} ref={lastBookElement} className={`py-2 hover:bg-gray-500 flex gap-4 cursor-pointer`} >
+                            {book.isbn && book.isbn.length > 0 ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-S.jpg`} alt={book.title} className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500`} /> : <div className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500 flex items-center justify-center`}><PiSmileyXEyesFill color={'yellow'} /></div>}
+                            {book.title}
+                        </div>
                     }else{
-                        return <div key={idx} className={`py-2 hover:bg-gray-500 flex gap-4`} >
+                        return <div key={idx} className={`py-2 hover:bg-gray-500 flex gap-4 cursor-pointer`} >
                             {book.isbn && book.isbn.length > 0 ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-S.jpg`} alt={book.title} className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500`} /> : <div className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500 flex items-center justify-center`}><PiSmileyXEyesFill color={'yellow'} /></div>}
                             {book.title}
                         </div>
