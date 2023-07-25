@@ -15,8 +15,7 @@ const contactsSchema = new mongoose.Schema({
     },
     dp:{
         type: String,
-        required: true,
-        default:"https://res.cloudinary.com/issie/image/upload/v1688227224/memojis/female-memoji-1.jpg",
+        default:"",
     },
     gender:{
         type: String,

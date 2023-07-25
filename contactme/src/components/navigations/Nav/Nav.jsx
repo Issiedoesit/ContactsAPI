@@ -4,7 +4,7 @@ import NavData from '../../../data/NavData'
 
 const Nav = () => {
   return (
-    <nav className='w-full px-3 py-4 bg-white text-slate-950 flex items-center gap-10'>
+    <nav className='w-full px-3 py-4 bg-white text-slate-950 flex items-center gap-10 sticky top-0 left-0 z-20 border-b border-b-slate-900'>
         <h2 className='font-bold text-2xl'>Contact<span className='font-mono'>me</span></h2>
         <ul className='flex items-center gap-4'>
             {NavData.map((data, idx)=>{

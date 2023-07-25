@@ -9,6 +9,11 @@ const NavData = [
         path:"/about",
         name:"About"
     },
+    {
+        id:"books",
+        path:"/books",
+        name:"Books"
+    },
 ]
 
 export default NavData

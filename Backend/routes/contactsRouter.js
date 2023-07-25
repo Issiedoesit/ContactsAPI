@@ -17,16 +17,29 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
 
 
-    const {name, email, phone} = req.body
+    let {name, email, phone, gender, dp} = req.body
 
-    if(!name || !email || !phone){
+    if(!dp){
+        if(gender == "male"){
+            dp = "https://res.cloudinary.com/issie/image/upload/v1688227224/memojis/male-memoji-1.jpg"
+        }else if (gender == "female"){
+            dp = "https://res.cloudinary.com/issie/image/upload/v1688227224/memojis/female-memoji-1.jpg"
+        }
+        else{
+            dp = "https://res.cloudinary.com/issie/image/upload/v1688227224/memojis/female-memoji-1.jpg"
+        }
+    }
+
+    if(!name || !email || !phone || !gender){
         res.status(400).json({message:"All fields are required"})
     }
 
     const contact = await Contacts.create({
         name,
         email,
-        phone
+        phone,
+        dp,
+        gender
     })
 
     if (contact) {
@@ -75,9 +88,10 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const id = req.params.id
+
     try{
-        const deletedContact = await Contacts.findOneAndDelete(id)
-        res.status(200).json({message: "Successfully deleted contact", contact : deletedContact})
+        const contact = await Contacts.findByIdAndRemove(id)
+        res.status(200).json({message: "Successfully deleted contact", id:id,  contact : contact})
     }catch{
         res.status(404).json({message: "Contact not found"});
     }

@@ -55,8 +55,8 @@ const ModalWrap = ({id, children, modalState, handleModal, itemPosition, padding
       body.style.height = '100vh';
       setHeight(modalRef.current.scrollHeight);
     } else {
-      body.style.overflow = 'hidden';
-      body.style.height = '100vh';
+      body.style.overflow = '';
+      body.style.height = '';
     }
     window.scrollTo(0, scrollPosition);
   }, [modalState]);
