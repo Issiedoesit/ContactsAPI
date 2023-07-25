@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react'
 import { BeatLoader } from 'react-spinners'
 import useBookSearch from '../../hooks/useBookSearch'
 import Template from '../elements/Templates/Template'
-import {PiSmileyXEyesFill} from 'react-icons/pi'
+import BookPreview from '../../widgets/BookPreview'
 
 const Books = () => {
 
@@ -16,6 +16,7 @@ const Books = () => {
 
     const lastBookElement = useCallback(node => {
 
+        // console.log(node);
         if(loading) return
         if (observer.current) observer.current.disconnect() 
         observer.current = new IntersectionObserver(entries => {
@@ -39,15 +40,9 @@ const Books = () => {
                 {books.length == 0 && query && !loading && !error && <div className={`py-4`}>Your search "{query}" returned 0 results</div>}
                 {books.length > 0 && books.map((book, idx) => {
                     if(books.length == idx + 1) {
-                        return <div key={idx} ref={lastBookElement} className={`py-2 hover:bg-gray-500 flex gap-4 cursor-pointer`} >
-                            {book.isbn && book.isbn.length > 0 ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-S.jpg`} alt={book.title} className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500`} /> : <div className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500 flex items-center justify-center`}><PiSmileyXEyesFill color={'yellow'} /></div>}
-                            {book.title}
-                        </div>
+                        return <BookPreview key={idx} ref={lastBookElement} book={book} />
                     }else{
-                        return <div key={idx} className={`py-2 hover:bg-gray-500 flex gap-4 cursor-pointer`} >
-                            {book.isbn && book.isbn.length > 0 ? <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-S.jpg`} alt={book.title} className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500`} /> : <div className={`bg-slate-500 w-14 h-20 border-b-8 border-b-blue-500 flex items-center justify-center`}><PiSmileyXEyesFill color={'yellow'} /></div>}
-                            {book.title}
-                        </div>
+                        return <BookPreview key={idx} book={book} />
                     }
                 })}
             </div>
@@ -57,5 +52,7 @@ const Books = () => {
     </Template>
   )
 }
+
+
 
 export default Books

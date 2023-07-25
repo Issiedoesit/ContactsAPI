@@ -24,7 +24,7 @@ const useBookSearch = (query, pageNumber, setPageNumber) => {
             cancelToken: new axios.CancelToken(c => cancel = c)
         })
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setBooks((prevBooks)=>{
                 return [...new Set([...prevBooks, ...res.data.docs])]
                 // return [...new Set([...prevBooks, ...res.data.docs.map(books => books)])]
